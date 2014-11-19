@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputScript library="default" name="dist/js/jquery-2.1.1.min.js" />
+        <h:outputStylesheet library="default" name="dist/css/bootstrap.min.css" />
+        <h:outputStylesheet library="default" name="dist/css/bootstrap-theme.min.css" />
+        <h:outputScript library="default" name="dist/js/bootstrap.min.js" />
+        
+        <style>.centro {height: 500px; width:800px;background-color:#ccc; }
+            .centro h1 {
+                text-align: center;               
+                padding-top: 20px;
+            }
+            .centro input,label{
+                
+                margin-left:  10px;
+                width: 400px;
+                position: inherit;
+            }
+            #conteudo {
+                margin-top: 50px;
+            }
+            #conteudo input,label{
+               
+                width : 300px;
+                margin-left: 250px;
+            }
+            
+        </style>
+        <script>
+            
+            $(document).ready(function(){
+                $("input[type=text]:nth(0)").attr("placeholder","Informe o ID do time");
+                $("input[type=text]:nth(1)").attr("placeholder","Informe o Nome do time");
+                $("input[type=text]:nth(2)").attr("placeholder","Informe a Cidade do time");
+                $("input[type=text]:nth(3)").attr("placeholder","Informe o UF do time");
+            });
+        </script>
+            
+    </h:head>
+    <h:body>
+        <div class="row">
+            <div class="center-block centro" >
+        <h1 >Cadastro de Times</h1>
+        <h:form id="cadastroTimes" role="form"  >
+            <div id="conteudo">
+         <div class="form-group">
+        <h:outputLabel value="ID" for="txtID"/>
+        <h:inputText id="txtID"  value="#{timesBean.time.id}" class="form-control"  />
+        </div>
+        <div class="form-group">
+        <h:outputLabel value="Nome" for="txtNome"/>
+        <h:inputText id="txtNome" value="#{timesBean.time.nome}" class="form-control"  />
+        </div>
+        <div class="form-group">
+        <h:outputLabel value="Cidade" for="txtNome"/>
+        <h:inputText id="txtCidade" value="#{timesBean.time.cidade}" class="form-control"  />
+        </div>
+        <div class="form-group">
+        <h:outputLabel value="UF" for="txtNome"/>
+        <h:inputText id="txtUF" value="#{timesBean.time.uf}" class="form-control"  />
+        </div>
+            <div class="form-group">
+        <h:commandButton value="Salvar" action="#{timesBean.salvarTimes}">
+            <f:ajax execute="@form" render=":tabelaTimes"/>
+        </h:commandButton>
+                </div>
+                </div>
+        </h:form>        
+        </div>
+        </div>
+        
+        <div style="width: 800px; margin-left: 274px;" >
+        <h:dataTable id="tabelaTimes" value="#{timesBean.timeLista}" var="times" class="table table-responsive table-hover">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{times.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
+                <h:outputText value="#{times.nome}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Cidade</f:facet>
+                <h:outputText value="#{times.cidade}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">UF</f:facet>
+                <h:outputText value="#{times.uf}"/>
+            </h:column>
+</h:dataTable>
+</div>
+    </h:body>
+</html>
+
